@@ -52,8 +52,8 @@
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button type="submit">
-        <span *ngIf="categoryId">Editar categoría</span>
-        <span *ngIf="!categoryId">Guardar categoría</span>
+        <span *ngIf="!isNew">Editar categoría</span>
+        <span *ngIf="isNew">Guardar categoría</span>
       </button>
     </mat-card-actions>
   </mat-card>
