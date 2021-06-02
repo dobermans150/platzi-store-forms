@@ -19,8 +19,12 @@ export class CategoriesService {
     return this.http.post<Category>(`${environment.url_api}/categories/`, data);
   }
 
+  getCatergory(id: string) {
+    return this.http.get<Category>(`${environment.url_api}/categories/${id}`);
+  }
+
   updateCategory(id: string, data: Partial<Category>) {
-    return this.http.post<Category>(
+    return this.http.put<Category>(
       `${environment.url_api}/categories/${id}`,
       data
     );
