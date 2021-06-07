@@ -7,14 +7,18 @@
       <div class="row">
         <div class="col-xs">
           <mat-form-field>
-            <input placeholder="Id" formControlName="id" matInput type="text">
-          </mat-form-field>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs">
-          <mat-form-field>
-            <input placeholder="Title" formControlName="title" matInput type="text">
+            <input placeholder="Name" formControlName="name" matInput type="text">
+            <div
+            class="messages"
+            *ngIf="nameField.touched && nameField.invalid"
+          >
+            <mat-error *ngIf="nameField.hasError('required')">
+              Este campo es requerido
+            </mat-error>
+            <mat-error *ngIf="nameField.hasError('minlength')">
+              El nombre debe ser de 4 caracteres minimo
+            </mat-error>
+          </div>
           </mat-form-field>
         </div>
       </div>
@@ -34,6 +38,18 @@
           <mat-form-field>
             <textarea placeholder="Text" formControlName="description" matInput></textarea>
           </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs">
+          <mat-form-field>
+            <mat-label>Categories</mat-label>
+            <mat-select formControlName="category_id">
+              <mat-option *ngFor="let category of categories" [value] = "category._id"> {{category.name}} </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div *ngIf="priceField.errors && priceField.dirty">
+          </div>
         </div>
       </div>
       <div class="row">
