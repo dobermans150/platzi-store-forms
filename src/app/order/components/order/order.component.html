@@ -62,6 +62,7 @@
                 *ngFor="let address of addressField.controls; let i = index"
               >
                 <div [formGroupName]="i">
+                  <!-- Zip code -->
                   <mat-form-field>
                     <mat-label>ZipCode</mat-label>
                     <input
@@ -71,6 +72,8 @@
                       type="text"
                     />
                   </mat-form-field>
+
+                  <!-- Text -->
                   <mat-form-field>
                     <mat-label>Text</mat-label>
                     <input

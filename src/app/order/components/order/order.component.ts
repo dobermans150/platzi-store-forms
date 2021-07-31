@@ -28,27 +28,28 @@ export class OrderComponent implements OnInit {
   private buildForm() {
     this.form = this.formBuilder.group({
       name: ['', [Validators.required]],
-      address: this.formBuilder.array([])
+      address: this.formBuilder.array([]),
     });
   }
 
-  addAddressField(event){
-    /* event.preventDefault(); */
-    this.addressField.push(this.createAddressField())
+  addAddressField(event) {
+    event.preventDefault();
+    this.addressField.push(this.createAddressField());
+    console.log(this.addressField.controls);
   }
 
-  save(){
+  save() {
     console.log(this.form.value);
   }
 
-  private createAddressField(){
+  private createAddressField() {
     return this.formBuilder.group({
       zip: ['', Validators.required],
-      text: ['', [Validators.required]]
-    })
+      text: ['', [Validators.required]],
+    });
   }
 
-  get addressField(){
+  get addressField() {
     return this.form.get('address') as FormArray;
   }
 }

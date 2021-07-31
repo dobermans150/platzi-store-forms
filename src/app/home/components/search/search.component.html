@@ -1,0 +1,13 @@
+<p>
+    <input type="search" [formControl] = "searchField">
+</p>
+
+<p>
+    {{searchField.value}}
+</p>
+
+<div class="image-grind">
+    <div *ngFor="let result of results" class="image">
+        <img [src]="result.url" alt="">
+    </div>
+</div>

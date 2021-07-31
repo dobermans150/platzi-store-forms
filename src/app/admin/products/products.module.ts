@@ -8,20 +8,20 @@ import { ProductsRoutingModule } from './products-routing.module';
 import { ProductsComponent } from './components/products/products.component';
 import { ProductCreateComponent } from './components/product-create/product-create.component';
 import { ProductEditComponent } from './components/product-edit/product-edit.component';
-
-
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [
     ProductsComponent,
     ProductCreateComponent,
-    ProductEditComponent
+    ProductEditComponent,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     MaterialModule,
-    ProductsRoutingModule
-  ]
+    ProductsRoutingModule,
+    SharedModule,
+  ],
 })
-export class ProductsModule { }
+export class ProductsModule {}

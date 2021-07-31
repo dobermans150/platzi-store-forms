@@ -15,10 +15,9 @@ import { Category } from 'src/app/core/models/category.model';
 @Component({
   selector: 'app-product-create',
   templateUrl: './product-create.component.html',
-  styleUrls: ['./product-create.component.scss']
+  styleUrls: ['./product-create.component.scss'],
 })
 export class ProductCreateComponent implements OnInit {
-
   form: FormGroup;
   image$: Observable<any>;
   categories: Array<Category> = [];
@@ -41,8 +40,7 @@ export class ProductCreateComponent implements OnInit {
     event.preventDefault();
     if (this.form.valid) {
       const product = this.form.value;
-      this.productsService.createProduct(product)
-      .subscribe((newProduct) => {
+      this.productsService.createProduct(product).subscribe((newProduct) => {
         console.log(newProduct);
         this.router.navigate(['./admin/products']);
       });
@@ -55,17 +53,18 @@ export class ProductCreateComponent implements OnInit {
     const fileRef = this.storage.ref(name);
     const task = this.storage.upload(name, file);
 
-    task.snapshotChanges()
-    .pipe(
-      finalize(() => {
-        this.image$ = fileRef.getDownloadURL();
-        this.image$.subscribe(url => {
-          console.log(url);
-          this.form.get('image').setValue(url);
-        });
-      })
-    )
-    .subscribe();
+    task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.image$ = fileRef.getDownloadURL();
+          this.image$.subscribe((url) => {
+            console.log(url);
+            this.form.get('image').setValue(url);
+          });
+        })
+      )
+      .subscribe();
   }
 
   private buildForm() {
@@ -73,31 +72,35 @@ export class ProductCreateComponent implements OnInit {
       name: ['', [Validators.required, Validators.minLength(4)]],
       price: ['', [Validators.required, MyValidators.isPriceValid]],
       image: ['', [Validators.required]],
-      category_id: ['',[Validators.required]],
+      category_id: ['', [Validators.required]],
       description: ['', [Validators.required, Validators.minLength(10)]],
+      stock: [100, [Validators.required]],
+    });
+
+    this.form.get('stock').valueChanges.subscribe((value) => {
+      console.log(value);
     });
   }
 
-  private getCategories(){
-    this.categoriesService.getAllCategories().subscribe(categories => {
+  private getCategories() {
+    this.categoriesService.getAllCategories().subscribe((categories) => {
       this.categories = categories;
-    })
+    });
   }
 
   get priceField() {
     return this.form.get('price');
   }
 
-  get nameField(){
-    return this.form.get('name')
+  get nameField() {
+    return this.form.get('name');
   }
 
-  get imageField(){
-    return this.form.get('image')
+  get imageField() {
+    return this.form.get('image');
   }
 
-  get descriptionField(){
-    return this.form.get('description')
+  get descriptionField() {
+    return this.form.get('description');
   }
-
-} 
+}
